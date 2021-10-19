@@ -6,6 +6,9 @@ extends TileMap
 #	print(get_used_cells())
 #	print(get_used_cells_by_id(0))
 #	print(get_cellv(Vector2(0,0)))
+
+var FinalPath = []
+var AlternativeRoutes = []
 var AdjacentAdjustedCell = [Vector2(1,0),Vector2(0,1), Vector2(1,-1), Vector2(0,-1), Vector2(-1,0), Vector2(-1,1)]
 onready var CentreHex = tile_set.tile_get_texture(0).get_size()/2
 const OverLayTile = preload("res://OverLayTile.tscn")
@@ -63,9 +66,7 @@ func DistanceMetric(startpos,endpos):
 	else:
 		Dist = max(abs(dx),abs(dy))
 	return Dist
-	
-var FinalPath = []
-var AlternativeRoutes = []
+
 func PathFind(Currentpos,Mousepos):
 	for _i in range(get_child_count()):
 		remove_child(get_child(0))
