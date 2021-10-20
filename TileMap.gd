@@ -15,6 +15,8 @@ const OverLayTile = preload("res://OverLayTile.tscn")
 
 func _ready():
 	position -= CentreHex
+	set_collision_mask_bit(0, false)
+	set_collision_mask_bit(1, true)
 
 func LayTile(Cell):
 	var OverLay = OverLayTile.instance()
@@ -74,7 +76,8 @@ func PathFind(Currentpos,Mousepos):
 	var Cell = FindCell(Mousepos)
 	Currentpos += CentreHex
 	Currentpos = FindCell(Currentpos)
-	if get_cellv(Cell) != 1:
+
+	if !(get_collision_mask_bit(get_cellv(Cell))):
 		var AdjustedCell = AdjustCell(Cell)
 		var DisttoGoal = DistanceMetric(AdjustCell(Currentpos),AdjustedCell)
 		var ShortestRoute = DisttoGoal + 1 # +1 for the start square
